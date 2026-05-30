@@ -138,8 +138,17 @@
   <script src="data.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Intentar obtener el ID desde query params (ej: ?id=celta)
       const urlParams = new URLSearchParams(window.location.search);
-      const carId = urlParams.get('id');
+      let carId = urlParams.get('id');
+      
+      // Si no hay query param, intentar obtenerlo del pathname (ej: /autos/celta)
+      if (!carId) {
+        const pathParts = window.location.pathname.split('/').filter(p => p);
+        if (pathParts.length > 0) {
+          carId = pathParts[pathParts.length - 1]; // Toma la última parte de la URL
+        }
+      }
       
       const car = vehiclesData[carId];
       
