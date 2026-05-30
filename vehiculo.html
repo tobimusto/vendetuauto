@@ -9,7 +9,7 @@
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   
   <!-- Styles -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/styles.css">
   <style>
     .v-detail-hero { padding: 120px 0 4rem; }
     .v-detail-grid { display: grid; grid-template-columns: 1fr 400px; gap: 3rem; align-items: start; }
@@ -47,11 +47,11 @@
   <!-- HEADER -->
   <header class="site-header scrolled">
     <div class="container header-row">
-      <a href="index.html" class="logo">
+      <a href="/" class="logo">
         Vende<span class="text-gradient">TuAuto</span>
       </a>
       <nav class="nav-links">
-        <a href="index.html#catalogo"><i class="ph-bold ph-arrow-left"></i> Volver al catálogo</a>
+        <a href="/#catalogo"><i class="ph-bold ph-arrow-left"></i> Volver al catálogo</a>
       </nav>
     </div>
   </header>
@@ -135,7 +135,7 @@
     </div>
   </footer>
 
-  <script src="data.js"></script>
+  <script src="/data.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // Intentar obtener el ID desde query params (ej: ?id=celta)
@@ -187,7 +187,7 @@
       } else {
         document.getElementById('loading').textContent = 'Vehículo no encontrado. Redirigiendo al catálogo...';
         setTimeout(() => {
-          window.location.href = 'index.html#catalogo';
+          window.location.href = '/#catalogo';
         }, 2000);
       }
     });

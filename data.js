@@ -11,9 +11,9 @@ const vehiclesData = {
     location: 'CABA',
     description: 'Excelente estado general. Única mano, todos los services oficiales al día. VTV vigente. Listo para transferir.',
     features: ['Aire acondicionado', 'Dirección hidráulica', 'Levantavidrios eléctricos delanteros', 'Cierre centralizado', 'Alarma', 'Bluetooth'],
-    image: 'assets/vehicles/gol-trend.png',
+    image: '/assets/vehicles/gol-trend.png',
     gallery: [
-      'assets/vehicles/gol-trend.png'
+      '/assets/vehicles/gol-trend.png'
       // Placeholder for more images
     ]
   },
@@ -29,9 +29,9 @@ const vehiclesData = {
     location: 'Zona Norte',
     description: 'Muy buen andar. Batería nueva. Cubiertas al 80%. Papeles al día, libre de multas y deudas.',
     features: ['Aire acondicionado', 'Dirección hidráulica', 'Estéreo con USB'],
-    image: 'assets/vehicles/gol-power.png',
+    image: '/assets/vehicles/gol-power.png',
     gallery: [
-      'assets/vehicles/gol-power.png'
+      '/assets/vehicles/gol-power.png'
     ]
   },
   'celta': {
@@ -46,9 +46,9 @@ const vehiclesData = {
     location: 'Zona Sur',
     description: 'Interior impecable, uso familiar. Correa de distribución cambiada a los 70mil km. Muy económico en consumo.',
     features: ['Aire acondicionado', 'Dirección hidráulica', 'Levantavidrios eléctricos', 'Cierre centralizado', 'Faros antiniebla'],
-    image: 'assets/vehicles/celta.png',
+    image: '/assets/vehicles/celta.png',
     gallery: [
-      'assets/vehicles/celta.png'
+      '/assets/vehicles/celta.png'
     ]
   }
 };
