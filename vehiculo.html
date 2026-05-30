@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VendeTuAuto | Detalle del Vehículo</title>
+  
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .v-detail-hero { padding: 120px 0 4rem; }
+    .v-detail-grid { display: grid; grid-template-columns: 1fr 400px; gap: 3rem; align-items: start; }
+    
+    .v-gallery { background: var(--bg-2); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
+    .v-main-img { width: 100%; height: 500px; object-fit: cover; }
+    
+    .v-info-card { background: var(--bg-2); border-radius: var(--radius); padding: 2.5rem; border: 1px solid var(--line); position: sticky; top: 100px; }
+    .v-title-big { font-size: 2.2rem; margin-bottom: 0.5rem; line-height: 1.1; }
+    .v-version { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem; }
+    .v-price-big { font-size: 2.8rem; font-weight: 900; color: var(--accent); margin-bottom: 2rem; }
+    
+    .v-data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+    .v-data-item { display: flex; flex-direction: column; gap: 0.2rem; }
+    .v-data-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+    .v-data-val { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+    .v-data-val i { color: var(--accent); }
+    
+    .v-description { margin-top: 3rem; background: var(--bg-2); border-radius: var(--radius); padding: 2.5rem; border: 1px solid var(--line); }
+    .v-description h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+    
+    .v-features { margin-top: 2rem; }
+    .v-features ul { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .v-features li { display: flex; align-items: center; gap: 0.8rem; color: var(--text-muted); }
+    .v-features li i { color: var(--success); font-size: 1.2rem; }
+    
+    @media (max-width: 992px) {
+      .v-detail-grid { grid-template-columns: 1fr; }
+      .v-main-img { height: 350px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header scrolled">
+    <div class="container header-row">
+      <a href="index.html" class="logo">
+        Vende<span class="text-gradient">TuAuto</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html#catalogo"><i class="ph-bold ph-arrow-left"></i> Volver al catálogo</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- DETAIL -->
+  <section class="v-detail-hero">
+    <div class="container">
+      <div id="loading" style="text-align: center; padding: 4rem;">Cargando vehículo...</div>
+      
+      <div id="vehiculoContent" class="v-detail-grid" style="display: none;">
+        
+        <!-- Izquierda: Galería y Descripción -->
+        <div class="v-left">
+          <div class="v-gallery">
+            <img id="vMainImg" src="" alt="" class="v-main-img">
+          </div>
+          
+          <div class="v-description">
+            <h3>Descripción del vendedor</h3>
+            <p id="vDesc" style="color: var(--text-muted); line-height: 1.8;"></p>
+            
+            <h3 style="margin-top: 2.5rem;">Equipamiento destacado</h3>
+            <div class="v-features">
+              <ul id="vFeaturesList"></ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Derecha: Tarjeta de Info y CTA -->
+        <div class="v-right">
+          <div class="v-info-card">
+            <h1 id="vTitle" class="v-title-big"></h1>
+            <div id="vVersion" class="v-version"></div>
+            <div id="vPrice" class="v-price-big"></div>
+            
+            <div class="v-data-grid">
+              <div class="v-data-item">
+                <span class="v-data-label">Año</span>
+                <span id="vYear" class="v-data-val"><i class="ph-fill ph-calendar-blank"></i> </span>
+              </div>
+              <div class="v-data-item">
+                <span class="v-data-label">Kilómetros</span>
+                <span id="vKm" class="v-data-val"><i class="ph-fill ph-gauge"></i> </span>
+              </div>
+              <div class="v-data-item">
+                <span class="v-data-label">Combustible</span>
+                <span id="vFuel" class="v-data-val"><i class="ph-fill ph-gas-pump"></i> </span>
+              </div>
+              <div class="v-data-item">
+                <span class="v-data-label">Transmisión</span>
+                <span id="vTrans" class="v-data-val"><i class="ph-fill ph-steering-wheel"></i> </span>
+              </div>
+              <div class="v-data-item">
+                <span class="v-data-label">Color</span>
+                <span id="vColor" class="v-data-val"><i class="ph-fill ph-palette"></i> </span>
+              </div>
+              <div class="v-data-item">
+                <span class="v-data-label">Ubicación</span>
+                <span id="vLoc" class="v-data-val"><i class="ph-fill ph-map-pin"></i> </span>
+              </div>
+            </div>
+            
+            <a id="vWspBtn" href="#" target="_blank" class="btn btn-wsp" style="width: 100%; font-size: 1.1rem; padding: 1rem;">
+              <i class="ph-bold ph-whatsapp-logo"></i> Consultar por este auto
+            </a>
+            
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: 1rem;">
+              Venta asistida y gestionada de forma segura por VendeTuAuto.
+            </p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-copy">© 2026 VendeTuAuto. Desarrollado por CodeTM.</p>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const carId = urlParams.get('id');
+      
+      const car = vehiclesData[carId];
+      
+      if (car) {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('vehiculoContent').style.display = 'grid';
+        
+        document.title = `${car.title} | VendeTuAuto`;
+        
+        document.getElementById('vTitle').textContent = car.title;
+        document.getElementById('vVersion').textContent = car.version;
+        document.getElementById('vPrice').textContent = car.price;
+        document.getElementById('vYear').innerHTML = `<i class="ph-fill ph-calendar-blank"></i> ${car.year}`;
+        document.getElementById('vKm').innerHTML = `<i class="ph-fill ph-gauge"></i> ${car.km} km`;
+        document.getElementById('vFuel').innerHTML = `<i class="ph-fill ph-gas-pump"></i> ${car.fuel}`;
+        document.getElementById('vTrans').innerHTML = `<i class="ph-fill ph-steering-wheel"></i> ${car.transmission}`;
+        document.getElementById('vColor').innerHTML = `<i class="ph-fill ph-palette"></i> ${car.color}`;
+        document.getElementById('vLoc').innerHTML = `<i class="ph-fill ph-map-pin"></i> ${car.location}`;
+        
+        document.getElementById('vDesc').textContent = car.description;
+        document.getElementById('vMainImg').src = car.image;
+        document.getElementById('vMainImg').alt = car.title;
+        
+        const featuresList = document.getElementById('vFeaturesList');
+        car.features.forEach(f => {
+          const li = document.createElement('li');
+          li.innerHTML = `<i class="ph-bold ph-check-circle"></i> ${f}`;
+          featuresList.appendChild(li);
+        });
+        
+        // Setup WhatsApp Button
+        const waNumber = '5491154129974';
+        const message = `Hola! Me interesa el ${car.title} ${car.version} (${car.year}) publicado a ${car.price}.`;
+        document.getElementById('vWspBtn').href = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+        
+      } else {
+        document.getElementById('loading').textContent = 'Vehículo no encontrado. Redirigiendo al catálogo...';
+        setTimeout(() => {
+          window.location.href = 'index.html#catalogo';
+        }, 2000);
+      }
+    });
+  </script>
+</body>
+</html>
